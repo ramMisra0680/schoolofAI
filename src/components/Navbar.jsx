@@ -6,6 +6,7 @@ const LINKS = [
   ['/schools', 'For Schools'],
   ['/universities', 'For Universities'],
   ['/how-to-ai', 'How to AI'],
+  ['/AISchool/', 'AI Assistant', true], // static page served outside the SPA router
   ['/about', 'About Us'],
   ['/contact', 'Contact Us'],
 ]
@@ -19,11 +20,17 @@ export default function Navbar() {
           <span className="logo-mark">AI</span> India School Of AI
         </NavLink>
         <div className="nav-links">
-          {LINKS.map(([to, label]) => (
-            <NavLink key={to} to={to} end={to === '/'}>
-              {label}
-            </NavLink>
-          ))}
+          {LINKS.map(([to, label, isStatic]) =>
+            isStatic ? (
+              <a key={to} href={to}>
+                {label}
+              </a>
+            ) : (
+              <NavLink key={to} to={to} end={to === '/'}>
+                {label}
+              </NavLink>
+            )
+          )}
         </div>
         <button
           className="nav-burger"
@@ -37,11 +44,17 @@ export default function Navbar() {
         </button>
       </div>
       <div className={`nav-mobile${open ? ' open' : ''}`}>
-        {LINKS.map(([to, label]) => (
-          <NavLink key={to} to={to} end={to === '/'} onClick={() => setOpen(false)}>
-            {label}
-          </NavLink>
-        ))}
+        {LINKS.map(([to, label, isStatic]) =>
+          isStatic ? (
+            <a key={to} href={to} onClick={() => setOpen(false)}>
+              {label}
+            </a>
+          ) : (
+            <NavLink key={to} to={to} end={to === '/'} onClick={() => setOpen(false)}>
+              {label}
+            </NavLink>
+          )
+        )}
       </div>
     </nav>
   )
