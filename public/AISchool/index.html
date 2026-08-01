@@ -426,7 +426,10 @@
   }
   function ask(text) {
     if (!text) return;
-    addMsg("user", text.replace(/</g,"&lt;"));
+    var safe = String(text).replace(/[&<>"']/g, function (c) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" })[c];
+    });
+    addMsg("user", safe);
     setTimeout(function () {
       var r = respond(text);
       addMsg("bot", "<p>"+r.say+"</p>" + (r.card || ""));
