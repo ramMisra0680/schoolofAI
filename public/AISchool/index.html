@@ -354,8 +354,7 @@
 
   function perfCard(st) {
     st = st || STUDENTS[0];
-    var max = Math.max.apply(null, st.trend);
-    var bars = st.trend.map(function(v,i){ var h=Math.round(v/100*100); return '<i class="'+(i===st.trend.length-1?"hot":"")+'" style="height:'+h+'%"></i>'; }).join("");
+    var bars = st.trend.map(function(v,i){ return '<i class="'+(i===st.trend.length-1?"hot":"")+'" style="height:'+v+'%"></i>'; }).join("");
     return '<div class="rc"><div class="rc-h"><span class="ic" style="background:linear-gradient(150deg,#7C6BF5,#5B4BE0)">'+IC.chart+'</span><div><div class="t">'+st.n+' · performance</div><div class="s">Last 6 assessments</div></div></div><div class="rc-b"><div class="rowline"><span class="rl-b" style="background:var(--'+(st.s>=80?"good":st.s>=65?"warn":"crit")+')"></span>Current score<span class="rl-m">'+st.s+'/100</span></div><div class="bars" style="height:52px">'+bars+'</div><div class="rowline">Strength<span class="rl-m" style="color:var(--good)">'+st.strong+'</span></div><div class="rowline">Needs work<span class="rl-m" style="color:var(--warn)">'+st.gap+'</span></div></div><div class="rc-actions"><button class="abtn" data-ask="Draft a parent report for '+st.n.split(" ")[0]+'">Parent report</button><button class="abtn ghost" data-ask="Which course suits '+st.n.split(" ")[0]+'?">Course fit</button></div></div>'+tracedLine("Quiz scores · attendance · notes");
   }
 
